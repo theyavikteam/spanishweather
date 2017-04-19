@@ -37,6 +37,8 @@ dependencies {
         exclude module: 'okhttp'
     }
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    compile 'org.jetbrains.anko:anko-common:0.9'
 }
 repositories {
     mavenCentral()
