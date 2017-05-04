@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpainWeather</string>
+    <string name="select_autonomous_regions">Selecciona una Comunidad Autónoma</string>
 </resources>
