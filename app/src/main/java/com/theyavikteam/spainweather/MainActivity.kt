@@ -22,32 +22,31 @@ class MainActivity() : AppCompatActivity() {
     }
 
     fun initializeRetrofit() {
-//        val townForecastJob = TownForecastJob(true)
-//        townForecastJob.execute("11032")
-//        townForecastJob.useResponse {
-//            with(townForecastJob.response) {
-//                tvCity.text = city
-//                tvProvince.text = province
-//                rvDays.adapter = DailyForecastAdapter(prediction.days)
-//            }
-//        }
-//
-//    }
-        doAsync {
-            val townApi = Api.retrofit.create(TownApi::class.java)
-            val call = townApi.dailyForecast("11032", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YXZpazE0QGdtYWlsLmNvbSIsImp0aSI6Ijg5ZDM2YzZlLTEyOGQtNDAyMC1hNTAxLTM1MjUyODc2OWI3ZiIsImV4cCI6MTUwMDI3NTk5MywiaXNzIjoiQUVNRVQiLCJpYXQiOjE0OTI0OTk5OTMsInVzZXJJZCI6Ijg5ZDM2YzZlLTEyOGQtNDAyMC1hNTAxLTM1MjUyODc2OWI3ZiIsInJvbGUiOiIifQ.RmHivUS37ikYr4LHWiExLJt5yOXTvxCwghieFF7RT7g")
-            val result = call.execute().body()
-            val resultSplit = result.data.split("sh/")[1]
-
-            val call2 = townApi.dailyForecastPrediction(resultSplit)
-            val result2 = call2.execute().body()
-            uiThread {
-                tvCity.text = result2[0].city
-                tvProvince.text = result2[0].province
-                rvDays.adapter = DailyForecastAdapter(result2[0].prediction.days)
+        val townForecastJob = TownForecastJob(true)
+        townForecastJob.execute("11032"){
+            with(townForecastJob.response!!) {
+                tvCity.text = city
+                tvProvince.text = province
+                rvDays.adapter = DailyForecastAdapter(prediction.days)
             }
         }
+
     }
+//        doAsync {
+//            val townApi = Api.retrofit.create(TownApi::class.java)
+//            val call = townApi.dailyForecast("11032", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YXZpazE0QGdtYWlsLmNvbSIsImp0aSI6Ijg5ZDM2YzZlLTEyOGQtNDAyMC1hNTAxLTM1MjUyODc2OWI3ZiIsImV4cCI6MTUwMDI3NTk5MywiaXNzIjoiQUVNRVQiLCJpYXQiOjE0OTI0OTk5OTMsInVzZXJJZCI6Ijg5ZDM2YzZlLTEyOGQtNDAyMC1hNTAxLTM1MjUyODc2OWI3ZiIsInJvbGUiOiIifQ.RmHivUS37ikYr4LHWiExLJt5yOXTvxCwghieFF7RT7g")
+//            val result = call.execute().body()
+//            val resultSplit = result.data.split("sh/")[1]
+//
+//            val call2 = townApi.dailyForecastPrediction(resultSplit)
+//            val result2 = call2.execute().body()
+//            uiThread {
+//                tvCity.text = result2[0].city
+//                tvProvince.text = result2[0].province
+//                rvDays.adapter = DailyForecastAdapter(result2[0].prediction.days)
+//            }
+//        }
+//    }
 
     fun loadLocalities() {
         try {

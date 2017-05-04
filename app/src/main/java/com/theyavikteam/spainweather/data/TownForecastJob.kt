@@ -9,7 +9,7 @@ import org.jetbrains.anko.uiThread
 class TownForecastJob(var waitUI: Boolean) {
 
     var dailyResponse: List<AemetDailyResponse> = emptyList()
-    val response: AemetDailyResponse by lazy { dailyResponse[0] }
+    var response: AemetDailyResponse? = null
 
     private fun askQuestion(question: String): List<AemetDailyResponse> {
         val townApi = Api.retrofit.create(TownApi::class.java)
@@ -21,14 +21,10 @@ class TownForecastJob(var waitUI: Boolean) {
         return secondCall.execute().body()
     }
 
-    fun execute(question: String) {
+    fun execute(question: String, body: AemetDailyResponse?.() -> Unit) {
         doAsync {
             dailyResponse = askQuestion(question)
-        }
-    }
-
-    fun useResponse(body: AemetDailyResponse?.() -> Unit) {
-        doAsync {
+            response = dailyResponse[0];
             if (waitUI) {
                 uiThread { body(response) }
             } else {
