@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/region_row_height"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/space_normal"
+    android:paddingStart="@dimen/space_normal">
+
+    <TextView
+        android:id="@+id/tvProvince"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical" />
+
+</LinearLayout>
